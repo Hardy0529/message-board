@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">姓名</label>
+            <input id="nameValue" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">電話</label>
+            <input id="phoneValue" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">需求</label>
+            <input id="demandValue" type="text" class="form-control">
+        </div>
+        <div id="sendButton" class="btn btn-primary">提交</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        let sendButton = document.querySelector('#sendButton');
+
+        sendButton.addEventListener('click', getGoogleSheet);
+        function getGoogleSheet() {
+            let name = document.querySelector('#nameValue').value;
+            let phone = document.querySelector('#phoneValue').value;
+            let demand = document.querySelector('#demandValue').value;
+            console.log()
+            axios.get('https://script.google.com/macros/s/AKfycbyY9ULQ4EUNBMg9J9mAp20XUv_IB3squC5WwRxznbq6VQFw1f8sX3gFoMXi1fguU0GE/exec', {
+                params: {
+                    username: name,
+                    phone: phone,
+                    message: demand,
+                }
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
+        }
+
+    </script>
+</body>
+
+</html>
